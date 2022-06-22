@@ -22,10 +22,16 @@
             root.appendChild(element)
             */
             const root = document.querySelector('#root')
-            const element = React.createElement('h1', {
-                children: 'Hello from React!!',
-                className: 'heading-1'
+            const p1 = React.createElement('p', {
+                children: 'Hello paragraf 1!!'
             })
+            const p2 = React.createElement('p', {
+                children: 'Hello paragraf 2!!'
+            })
+            const element = React.createElement(React.Fragment, {
+                children: [p1,p2]
+            })
+            // console.log(element)
             const rootReact = ReactDOM.createRoot(root);
             rootReact.render(element)
         </script>
