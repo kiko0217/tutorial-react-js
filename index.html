@@ -22,15 +22,22 @@
             root.appendChild(element)
             */
             const root = document.querySelector('#root')
-            const p1 = React.createElement('p', {
-                children: 'Hello paragraf 1!!'
-            })
-            const p2 = React.createElement('p', {
-                children: 'Hello paragraf 2!!'
-            })
-            const element = React.createElement(React.Fragment, {
-                children: [p1,p2]
-            })
+            // const p1 = React.createElement('p', {
+            //     children: 'Hello paragraf 1!!'
+            // })
+            // const p2 = React.createElement('p', {
+            //     children: 'Hello paragraf 2!!'
+            // })
+            // const element = React.createElement(React.Fragment, {
+            //     children: [p1,p2]
+            // })
+            const element = React.createElement(
+                'ul',
+                {className: 'list'},
+                React.createElement('li', null, 'Apple'),
+                React.createElement('li', null, 'Orage'),
+                React.createElement('li', null, 'Grape'),
+            )
             // console.log(element)
             const rootReact = ReactDOM.createRoot(root);
             rootReact.render(element)
