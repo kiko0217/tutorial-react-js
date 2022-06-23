@@ -7,8 +7,9 @@
   "author": "kiko0217 <kiko0217@github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir public",
-    "start": "lite-server --baseDir public"
+    "build": "babel src --out-dir public -w",
+    "serve": "lite-server --baseDir public",
+    "start": "yarn build | yarn serve"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
