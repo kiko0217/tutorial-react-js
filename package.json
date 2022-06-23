@@ -7,11 +7,13 @@
   "author": "kiko0217 <kiko0217@github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir public"
+    "build": "babel src --out-dir public",
+    "start": "lite-server --baseDir public"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.5",
-    "@babel/preset-react": "^7.17.12"
+    "@babel/preset-react": "^7.17.12",
+    "lite-server": "^2.6.1"
   }
 }
