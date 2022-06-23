@@ -1,7 +1,7 @@
 const root = document.querySelector('#root')
 
 const rootReact = ReactDOM.createRoot(root);
-const tick = () => {
+/* const tick = () => {
     const element = (
         <div>
             <h1>Jam Sekarang</h1>
@@ -15,4 +15,17 @@ const tick = () => {
 tick()
 setInterval(() => {
     tick()
-}, 1000);
+}, 1000); */
+// const element = (
+//     <div 
+//     style={{
+//         width: 200,
+//         height: 200,
+//         backgroundColor: 'blue'
+//     }}
+//     ></div>   
+// )
+const element = (
+    <div className='box'></div>   
+)
+rootReact.render(element)
