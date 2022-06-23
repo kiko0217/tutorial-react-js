@@ -58,27 +58,41 @@ setInterval(() => {
 //         </>
 //     )
 // }
+// const App = () => {
+//     // ketika di reander dapat di bikin sebuat function collaback denga useEffect
+//     const [_stateClick,setStateClick] = React.useState(false)
+//     const [count,setCount] = React.useState(0)  
+//     // React.useEffect(() => {
+//     //     console.log(document.getElementById('judul'))
+//     // })
+    
+//     React.useEffect(() => {
+//       console.log('exec')
+    
+//       return () => {}
+//     }, [count])
+    
+//     return (
+//         <>
+//             <h1 id="judul">Hello ini Judul</h1>
+//             <button onClick={setStateClick.bind(this, true)}>Click dong!!!</button>
+//             <button onClick={setCount.bind(this, count+1)}>Tambah</button>
+//             Nillai saat ini adalah: {count}
+//         </>
+//     )
+// }
 const App = () => {
-    // ketika di reander dapat di bikin sebuat function collaback denga useEffect
-    const [_stateClick,setStateClick] = React.useState(false)
-    const [count,setCount] = React.useState(0)  
-    // React.useEffect(() => {
-    //     console.log(document.getElementById('judul'))
-    // })
-    
+    // const [login, setLogin] = React.useState(false)
+    const judulRef = React.useRef(null)
+
     React.useEffect(() => {
-      console.log('exec')
-    
-      return () => {}
-    }, [count])
-    
+      setTimeout(() => judulRef.current.textContent = 'Aplikasi', 1000)
+    }, [])
     return (
         <>
-            <h1 id="judul">Hello ini Judul</h1>
-            <button onClick={setStateClick.bind(this, true)}>Click dong!!!</button>
-            <button onClick={setCount.bind(this, count+1)}>Tambah</button>
-            Nillai saat ini adalah: {count}
+            <h1 ref={judulRef}>Application</h1>
         </>
     )
+    
 }
-setTimeout(()=>rootReact.render(<App />), 3000)
+rootReact.render(<App />)
