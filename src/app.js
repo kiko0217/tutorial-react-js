@@ -35,53 +35,53 @@ setInterval(() => {
 //     <button onClick={clickMe}>Click Me</button>
 // )
 
-// const clickMe = (msg) => {
-//     alert(msg)
-// }
-// const element = (
-//     <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
-// )
-// const App = () => {
-//     const state = React.useState(0)
-//     const [count,updateCount] = state
-//     return (
-//         <>
-//             <button onClick={updateCount.bind(this, count - 1)}>
-//                 -
-//             </button>
-//             <span style={{
-//                 color: 'white'
-//             }}>{count}</span>
-//             <button onClick={updateCount.bind(this, count+1)}>
-//                 +
-//             </button>
-//         </>
-//     )
-// }
-// const App = () => {
-//     // ketika di reander dapat di bikin sebuat function collaback denga useEffect
-//     const [_stateClick,setStateClick] = React.useState(false)
-//     const [count,setCount] = React.useState(0)  
-//     // React.useEffect(() => {
-//     //     console.log(document.getElementById('judul'))
-//     // })
-    
-//     React.useEffect(() => {
-//       console.log('exec')
-    
-//       return () => {}
-//     }, [count])
-    
-//     return (
-//         <>
-//             <h1 id="judul">Hello ini Judul</h1>
-//             <button onClick={setStateClick.bind(this, true)}>Click dong!!!</button>
-//             <button onClick={setCount.bind(this, count+1)}>Tambah</button>
-//             Nillai saat ini adalah: {count}
-//         </>
-//     )
-// }
+/* const clickMe = (msg) => {
+    alert(msg)
+}
+const element = (
+    <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
+)
 const App = () => {
+    const state = React.useState(0)
+    const [count,updateCount] = state
+    return (
+        <>
+            <button onClick={updateCount.bind(this, count - 1)}>
+                -
+            </button>
+            <span style={{
+                color: 'white'
+            }}>{count}</span>
+            <button onClick={updateCount.bind(this, count+1)}>
+                +
+            </button>
+        </>
+    )
+} */
+/* const App = () => {
+    // ketika di reander dapat di bikin sebuat function collaback denga useEffect
+    const [_stateClick,setStateClick] = React.useState(false)
+    const [count,setCount] = React.useState(0)  
+    // React.useEffect(() => {
+    //     console.log(document.getElementById('judul'))
+    // })
+    
+    React.useEffect(() => {
+      console.log('exec')
+    
+      return () => {}
+    }, [count])
+    
+    return (
+        <>
+            <h1 id="judul">Hello ini Judul</h1>
+            <button onClick={setStateClick.bind(this, true)}>Click dong!!!</button>
+            <button onClick={setCount.bind(this, count+1)}>Tambah</button>
+            Nillai saat ini adalah: {count}
+        </>
+    )
+} */
+/* const App = () => {
     // const [login, setLogin] = React.useState(false)
     const judulRef = React.useRef(null)
 
@@ -94,5 +94,22 @@ const App = () => {
         </>
     )
     
+} */
+const App = () => {
+    const nameRef = React.useRef(null)
+    const formSubmit = (event) => {
+        event.preventDefault()
+        const name = nameRef.current.value;
+        console.log(name)
+    }
+    return (
+        <form onSubmit={formSubmit}>
+            <div>
+                <label>Name: </label>
+                <input type="text" name="name" ref={nameRef} />
+            </div>
+            <button type="submit">Kirim</button>
+        </form>
+    )
 }
 rootReact.render(<App />)

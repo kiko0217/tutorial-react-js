@@ -33,59 +33,88 @@ setInterval(() => {
 // const element = (
 //     <button onClick={clickMe}>Click Me</button>
 // )
-// const clickMe = (msg) => {
-//     alert(msg)
-// }
-// const element = (
-//     <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
-// )
-// const App = () => {
-//     const state = React.useState(0)
-//     const [count,updateCount] = state
-//     return (
-//         <>
-//             <button onClick={updateCount.bind(this, count - 1)}>
-//                 -
-//             </button>
-//             <span style={{
-//                 color: 'white'
-//             }}>{count}</span>
-//             <button onClick={updateCount.bind(this, count+1)}>
-//                 +
-//             </button>
-//         </>
-//     )
-// }
-// const App = () => {
-//     // ketika di reander dapat di bikin sebuat function collaback denga useEffect
-//     const [_stateClick,setStateClick] = React.useState(false)
-//     const [count,setCount] = React.useState(0)  
-//     // React.useEffect(() => {
-//     //     console.log(document.getElementById('judul'))
-//     // })
-//     React.useEffect(() => {
-//       console.log('exec')
-//       return () => {}
-//     }, [count])
-//     return (
-//         <>
-//             <h1 id="judul">Hello ini Judul</h1>
-//             <button onClick={setStateClick.bind(this, true)}>Click dong!!!</button>
-//             <button onClick={setCount.bind(this, count+1)}>Tambah</button>
-//             Nillai saat ini adalah: {count}
-//         </>
-//     )
-// }
+
+/* const clickMe = (msg) => {
+    alert(msg)
+}
+const element = (
+    <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
+)
+const App = () => {
+    const state = React.useState(0)
+    const [count,updateCount] = state
+    return (
+        <>
+            <button onClick={updateCount.bind(this, count - 1)}>
+                -
+            </button>
+            <span style={{
+                color: 'white'
+            }}>{count}</span>
+            <button onClick={updateCount.bind(this, count+1)}>
+                +
+            </button>
+        </>
+    )
+} */
+
+/* const App = () => {
+    // ketika di reander dapat di bikin sebuat function collaback denga useEffect
+    const [_stateClick,setStateClick] = React.useState(false)
+    const [count,setCount] = React.useState(0)  
+    // React.useEffect(() => {
+    //     console.log(document.getElementById('judul'))
+    // })
+    
+    React.useEffect(() => {
+      console.log('exec')
+    
+      return () => {}
+    }, [count])
+    
+    return (
+        <>
+            <h1 id="judul">Hello ini Judul</h1>
+            <button onClick={setStateClick.bind(this, true)}>Click dong!!!</button>
+            <button onClick={setCount.bind(this, count+1)}>Tambah</button>
+            Nillai saat ini adalah: {count}
+        </>
+    )
+} */
+
+/* const App = () => {
+    // const [login, setLogin] = React.useState(false)
+    const judulRef = React.useRef(null)
+
+    React.useEffect(() => {
+      setTimeout(() => judulRef.current.textContent = 'Aplikasi', 1000)
+    }, [])
+    return (
+        <>
+            <h1 ref={judulRef}>Application</h1>
+        </>
+    )
+    
+} */
 
 const App = () => {
-  // const [login, setLogin] = React.useState(false)
-  const judulRef = React.useRef(null);
-  React.useEffect(() => {
-    setTimeout(() => judulRef.current.textContent = 'Aplikasi', 1000);
-  }, []);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", {
-    ref: judulRef
-  }, "Application"));
+  const nameRef = React.useRef(null);
+
+  const formSubmit = event => {
+    event.preventDefault();
+    const name = nameRef.current.value;
+    console.log(name);
+  };
+
+  return /*#__PURE__*/React.createElement("form", {
+    onSubmit: formSubmit
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Name: "), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "name",
+    ref: nameRef
+  })), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Kirim"));
 };
 
 rootReact.render( /*#__PURE__*/React.createElement(App, null));
