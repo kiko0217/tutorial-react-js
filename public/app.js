@@ -33,12 +33,25 @@ setInterval(() => {
 // const element = (
 //     <button onClick={clickMe}>Click Me</button>
 // )
+// const clickMe = (msg) => {
+//     alert(msg)
+// }
+// const element = (
+//     <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
+// )
 
-const clickMe = msg => {
-  alert(msg);
+const App = () => {
+  const state = React.useState(0);
+  const [count, updateCount] = state;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    onClick: updateCount.bind(this, count - 1)
+  }, "-"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'white'
+    }
+  }, count), /*#__PURE__*/React.createElement("button", {
+    onClick: updateCount.bind(this, count + 1)
+  }, "+"));
 };
 
-const element = /*#__PURE__*/React.createElement("button", {
-  onClick: clickMe.bind(this, 'hello world')
-}, "Click Me");
-rootReact.render(element);
+rootReact.render( /*#__PURE__*/React.createElement(App, null));

@@ -35,10 +35,27 @@ setInterval(() => {
 //     <button onClick={clickMe}>Click Me</button>
 // )
 
-const clickMe = (msg) => {
-    alert(msg)
+// const clickMe = (msg) => {
+//     alert(msg)
+// }
+// const element = (
+//     <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
+// )
+const App = () => {
+    const state = React.useState(0)
+    const [count,updateCount] = state
+    return (
+        <>
+            <button onClick={updateCount.bind(this, count - 1)}>
+                -
+            </button>
+            <span style={{
+                color: 'white'
+            }}>{count}</span>
+            <button onClick={updateCount.bind(this, count+1)}>
+                +
+            </button>
+        </>
+    )
 }
-const element = (
-    <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
-)
-rootReact.render(element)
+rootReact.render(<App />)
