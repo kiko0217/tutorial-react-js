@@ -28,10 +28,17 @@ setInterval(() => {
 // const element = (
 //     <div className='box'></div>   
 // )
-const clickMe = () => {
-    alert(1)
+// const clickMe = () => {
+//     alert(1)
+// }
+// const element = (
+//     <button onClick={clickMe}>Click Me</button>
+// )
+
+const clickMe = (msg) => {
+    alert(msg)
 }
 const element = (
-    <button onClick={clickMe}>Click Me</button>
+    <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
 )
 rootReact.render(element)
