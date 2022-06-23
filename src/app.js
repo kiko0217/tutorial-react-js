@@ -41,21 +41,28 @@ setInterval(() => {
 // const element = (
 //     <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
 // )
+// const App = () => {
+//     const state = React.useState(0)
+//     const [count,updateCount] = state
+//     return (
+//         <>
+//             <button onClick={updateCount.bind(this, count - 1)}>
+//                 -
+//             </button>
+//             <span style={{
+//                 color: 'white'
+//             }}>{count}</span>
+//             <button onClick={updateCount.bind(this, count+1)}>
+//                 +
+//             </button>
+//         </>
+//     )
+// }
 const App = () => {
-    const state = React.useState(0)
-    const [count,updateCount] = state
-    return (
-        <>
-            <button onClick={updateCount.bind(this, count - 1)}>
-                -
-            </button>
-            <span style={{
-                color: 'white'
-            }}>{count}</span>
-            <button onClick={updateCount.bind(this, count+1)}>
-                +
-            </button>
-        </>
-    )
+    // ketika di reander dapat di bikin sebuat function collaback denga useEffect
+    React.useEffect(() => {
+        console.log(document.getElementById('judul'))
+    })
+    return <h1 id="judul">Hello ini Judul</h1>
 }
-rootReact.render(<App />)
+setTimeout(()=>rootReact.render(<App />), 3000)

@@ -39,19 +39,32 @@ setInterval(() => {
 // const element = (
 //     <button onClick={clickMe.bind(this, 'hello world')}>Click Me</button>
 // )
+// const App = () => {
+//     const state = React.useState(0)
+//     const [count,updateCount] = state
+//     return (
+//         <>
+//             <button onClick={updateCount.bind(this, count - 1)}>
+//                 -
+//             </button>
+//             <span style={{
+//                 color: 'white'
+//             }}>{count}</span>
+//             <button onClick={updateCount.bind(this, count+1)}>
+//                 +
+//             </button>
+//         </>
+//     )
+// }
 
 const App = () => {
-  const state = React.useState(0);
-  const [count, updateCount] = state;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
-    onClick: updateCount.bind(this, count - 1)
-  }, "-"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'white'
-    }
-  }, count), /*#__PURE__*/React.createElement("button", {
-    onClick: updateCount.bind(this, count + 1)
-  }, "+"));
+  // ketika di reander dapat di bikin sebuat function collaback denga useEffect
+  React.useEffect(() => {
+    console.log(document.getElementById('judul'));
+  });
+  return /*#__PURE__*/React.createElement("h1", {
+    id: "judul"
+  }, "Hello ini Judul");
 };
 
-rootReact.render( /*#__PURE__*/React.createElement(App, null));
+setTimeout(() => rootReact.render( /*#__PURE__*/React.createElement(App, null)), 3000);
