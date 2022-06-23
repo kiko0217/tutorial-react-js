@@ -1,0 +1,17 @@
+{
+  "name": "tutorial-react",
+  "version": "0.0.1",
+  "description": "this just app to understand react framework",
+  "main": "index.js",
+  "repository": "https://github.com/kiko0217/tutorial-react-js.git",
+  "author": "kiko0217 <kiko0217@github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src --out-dir public"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.5",
+    "@babel/preset-react": "^7.17.12"
+  }
+}
