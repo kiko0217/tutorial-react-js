@@ -95,7 +95,7 @@ const App = () => {
     )
     
 } */
-const App = () => {
+/* const App = () => {
     const nameRef = React.useRef(null)
     const formSubmit = (event) => {
         event.preventDefault()
@@ -107,6 +107,22 @@ const App = () => {
             <div>
                 <label>Name: </label>
                 <input type="text" name="name" ref={nameRef} />
+            </div>
+            <button type="submit">Kirim</button>
+        </form>
+    )
+} */
+const App = () => {
+    const [name, setName] = React.useState('test')  
+    const formSubmit = (event) => {
+        event.preventDefault()
+        console.log(name)
+    }
+    return (
+        <form onSubmit={formSubmit}>
+            <div>
+                <label>Name: </label>
+                <input type="text" name="name" value={name} onChange={(event)=>setName(event.target.value)} />
             </div>
             <button type="submit">Kirim</button>
         </form>

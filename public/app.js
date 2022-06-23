@@ -97,12 +97,29 @@ const App = () => {
     
 } */
 
+/* const App = () => {
+    const nameRef = React.useRef(null)
+    const formSubmit = (event) => {
+        event.preventDefault()
+        const name = nameRef.current.value;
+        console.log(name)
+    }
+    return (
+        <form onSubmit={formSubmit}>
+            <div>
+                <label>Name: </label>
+                <input type="text" name="name" ref={nameRef} />
+            </div>
+            <button type="submit">Kirim</button>
+        </form>
+    )
+} */
+
 const App = () => {
-  const nameRef = React.useRef(null);
+  const [name, setName] = React.useState('test');
 
   const formSubmit = event => {
     event.preventDefault();
-    const name = nameRef.current.value;
     console.log(name);
   };
 
@@ -111,7 +128,8 @@ const App = () => {
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Name: "), /*#__PURE__*/React.createElement("input", {
     type: "text",
     name: "name",
-    ref: nameRef
+    value: name,
+    onChange: event => setName(event.target.value)
   })), /*#__PURE__*/React.createElement("button", {
     type: "submit"
   }, "Kirim"));
