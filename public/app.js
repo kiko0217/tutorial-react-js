@@ -59,12 +59,22 @@ setInterval(() => {
 
 const App = () => {
   // ketika di reander dapat di bikin sebuat function collaback denga useEffect
+  const [_stateClick, setStateClick] = React.useState(false);
+  const [count, setCount] = React.useState(0); // React.useEffect(() => {
+  //     console.log(document.getElementById('judul'))
+  // })
+
   React.useEffect(() => {
-    console.log(document.getElementById('judul'));
-  });
-  return /*#__PURE__*/React.createElement("h1", {
+    console.log('exec');
+    return () => {};
+  }, [count]);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", {
     id: "judul"
-  }, "Hello ini Judul");
+  }, "Hello ini Judul"), /*#__PURE__*/React.createElement("button", {
+    onClick: setStateClick.bind(this, true)
+  }, "Click dong!!!"), /*#__PURE__*/React.createElement("button", {
+    onClick: setCount.bind(this, count + 1)
+  }, "Tambah"), "Nillai saat ini adalah: ", count);
 };
 
 setTimeout(() => rootReact.render( /*#__PURE__*/React.createElement(App, null)), 3000);
