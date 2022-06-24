@@ -3,11 +3,24 @@ const rootReact = ReactDOM.createRoot(root);
 
 const App = () => {
   const [activity, setActivity] = React.useState('');
-  const [todo, setDoto] = React.useState([]);
+  const [todos, setTodos] = React.useState([]);
+
+  const generateId = () => {
+    return Date.now();
+  };
+
+  const removeHandler = todoId => {
+    const filteredTodo = todos.filter(todo => todo.id != todoId);
+    setTodos(filteredTodo);
+  };
 
   const addAktifitasHandler = event => {
     event.preventDefault();
-    setDoto([...todo, activity]);
+    setTodos([...todos, {
+      id: generateId(),
+      activity: activity
+    }]);
+    setActivity('');
   };
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Simple ToDo List"), /*#__PURE__*/React.createElement("form", {
@@ -19,10 +32,12 @@ const App = () => {
     onChange: event => setActivity(event.target.value)
   }), /*#__PURE__*/React.createElement("button", {
     type: "submit"
-  }, "Tambah")), /*#__PURE__*/React.createElement("ul", null, todo.map((item, idx) => {
+  }, "Tambah")), /*#__PURE__*/React.createElement("ul", null, todos.map((item, idx) => {
     return /*#__PURE__*/React.createElement("li", {
       key: idx
-    }, item);
+    }, item.activity + "\t", /*#__PURE__*/React.createElement("button", {
+      onClick: removeHandler.bind(this, item.id)
+    }, "Hapus"));
   })));
 };
 

@@ -3,11 +3,25 @@ const root = document.querySelector('#root')
 const rootReact = ReactDOM.createRoot(root);
 const App = () => {
     const [activity, setActivity] = React.useState('')
-    const [todo, setDoto] = React.useState([])
+    const [todos, setTodos] = React.useState([])
 
+    const generateId = () => {
+        return Date.now()
+    }
+    const removeHandler = (todoId)=>{
+        const filteredTodo = todos.filter(todo => todo.id != todoId)
+        setTodos(filteredTodo) 
+    }
     const addAktifitasHandler = (event) =>{
         event.preventDefault()
-        setDoto([...todo,activity])
+        setTodos([
+            ...todos,
+            {
+                id: generateId(),
+                activity: activity
+            }
+        ])
+        setActivity('')
     }
     return (
         <>
@@ -24,9 +38,12 @@ const App = () => {
                 <button type="submit">Tambah</button>
             </form>
             <ul>
-                {todo.map((item, idx) => {
+                {todos.map((item, idx) => {
                     return (
-                        <li key={idx}>{item}</li>
+                        <li key={idx}>
+                            {item.activity+"\t"}
+                            <button onClick={removeHandler.bind(this,item.id)}>Hapus</button>
+                        </li>
                     )
                 })}
             </ul>
