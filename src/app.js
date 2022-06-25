@@ -20,9 +20,11 @@ const App = () => {
     }
     const removeHandler = (todoId)=>{
         const filteredTodo = todos.filter(todo => todo.id != todoId)
-        setTodos(filteredTodo) 
-        setActivity('')
-        setEdit({})
+        setTodos(filteredTodo)
+        if (edit.id) {
+            setActivity('')
+            setEdit({})
+        }
     }
     const saveHandler = (event) =>{
         event.preventDefault()
