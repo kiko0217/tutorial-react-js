@@ -9,7 +9,7 @@ const App = () => {
     React.useEffect(() => {
       if(activity)setMessage('')
     
-      return () => {}
+    //   return () => {}
     }, [activity])
     
     const editHandler = (todo) => {
@@ -33,13 +33,24 @@ const App = () => {
             setEdit({})
         }
     }
+    const doneHandle = (todoDone, _event) => {
+        // event.preventDefault()
+        const todoIndex = todos.findIndex(todo => todo.id == todoDone.id)
+        const newTodo = {
+            ...todoDone,
+            done: !todoDone.done
+        }
+        const newTodos = [...todos]
+        newTodos[todoIndex] = newTodo
+        setTodos(newTodos)
+    }
     const saveHandler = (event) =>{
         event.preventDefault()
         if(!activity)return setMessage('Nama aktifitas jangan sampai kosong!!')
         if(edit.id){
             const editTodoIndex = todos.findIndex(todo => todo.id == edit.id)
             const updateTodo = {
-                id:edit.id,
+                ...edit,
                 activity
             }
             const updateTodos = [...todos]
@@ -53,7 +64,8 @@ const App = () => {
             ...todos,
             {
                 id: generateId(),
-                activity: activity
+                activity: activity,
+                done: false
             }
         ])
         setActivity('')
@@ -74,17 +86,26 @@ const App = () => {
                 <button type="submit">{edit.id ? 'Perbaruin' :'Tambah'}</button>
                 {edit.id && (<button onClick={cancleHandler}>Batal</button>)}
             </form>
-            <ul>
-                {todos.map((todo, idx) => {
-                    return (
-                        <li key={idx}>
-                            {todo.activity+"\t"}
-                            <button onClick={editHandler.bind(this, todo)}>Edit</button>
-                            <button onClick={removeHandler.bind(this,todo.id)}>Hapus</button>
-                        </li>
-                    )
-                })}
-            </ul>
+            {
+                todos.length > 0 ?
+                <ul>
+                    {todos.map((todo, idx) => {
+                        return (
+                            <li key={idx}>
+                                <input
+                                    type="checkbox"
+                                    checked={todo.done}
+                                    onChange={doneHandle.bind(this, todo)}
+                                />
+                                {todo.activity}{todo.done ? '\t(Selesai)\t' : '\t(Belum Selesai)\t'}
+                                <button onClick={editHandler.bind(this, todo)}>Edit</button>
+                                <button onClick={removeHandler.bind(this, todo.id)}>Hapus</button>
+                            </li>
+                        )
+                    })}
+                </ul>:
+                <i>Tidak ada data!!!</i>
+            }
 
         </>
     )

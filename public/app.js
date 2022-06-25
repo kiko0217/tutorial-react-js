@@ -7,8 +7,7 @@ const App = () => {
   const [edit, setEdit] = React.useState({});
   const [message, setMessage] = React.useState('');
   React.useEffect(() => {
-    if (activity) setMessage('');
-    return () => {};
+    if (activity) setMessage(''); //   return () => {}
   }, [activity]);
 
   const editHandler = todo => {
@@ -36,14 +35,24 @@ const App = () => {
     }
   };
 
+  const doneHandle = (todoDone, _event) => {
+    // event.preventDefault()
+    const todoIndex = todos.findIndex(todo => todo.id == todoDone.id);
+    const newTodo = { ...todoDone,
+      done: !todoDone.done
+    };
+    const newTodos = [...todos];
+    newTodos[todoIndex] = newTodo;
+    setTodos(newTodos);
+  };
+
   const saveHandler = event => {
     event.preventDefault();
     if (!activity) return setMessage('Nama aktifitas jangan sampai kosong!!');
 
     if (edit.id) {
       const editTodoIndex = todos.findIndex(todo => todo.id == edit.id);
-      const updateTodo = {
-        id: edit.id,
+      const updateTodo = { ...edit,
         activity
       };
       const updateTodos = [...todos];
@@ -56,7 +65,8 @@ const App = () => {
 
     setTodos([...todos, {
       id: generateId(),
-      activity: activity
+      activity: activity,
+      done: false
     }]);
     setActivity('');
   };
@@ -76,15 +86,19 @@ const App = () => {
     type: "submit"
   }, edit.id ? 'Perbaruin' : 'Tambah'), edit.id && /*#__PURE__*/React.createElement("button", {
     onClick: cancleHandler
-  }, "Batal")), /*#__PURE__*/React.createElement("ul", null, todos.map((todo, idx) => {
+  }, "Batal")), todos.length > 0 ? /*#__PURE__*/React.createElement("ul", null, todos.map((todo, idx) => {
     return /*#__PURE__*/React.createElement("li", {
       key: idx
-    }, todo.activity + "\t", /*#__PURE__*/React.createElement("button", {
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      checked: todo.done,
+      onChange: doneHandle.bind(this, todo)
+    }), todo.activity, todo.done ? '\t(Selesai)\t' : '\t(Belum Selesai)\t', /*#__PURE__*/React.createElement("button", {
       onClick: editHandler.bind(this, todo)
     }, "Edit"), /*#__PURE__*/React.createElement("button", {
       onClick: removeHandler.bind(this, todo.id)
     }, "Hapus"));
-  })));
+  })) : /*#__PURE__*/React.createElement("i", null, "Tidak ada data!!!"));
 };
 
 rootReact.render( /*#__PURE__*/React.createElement(App, null));
