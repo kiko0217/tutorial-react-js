@@ -4,7 +4,17 @@ const rootReact = ReactDOM.createRoot(root);
 const App = () => {
     const [activity, setActivity] = React.useState('')
     const [todos, setTodos] = React.useState([])
-
+    const [edit, setEdit] = React.useState({})
+    const editHandler = (todo) => {
+        setActivity(todo.activity)
+        setEdit(todo)
+    }
+    const cancleHandler = (event) => {
+        event.preventDefault()
+        setActivity('')
+        setEdit({})
+        // console.log(edit)
+    }
     const generateId = () => {
         return Date.now()
     }
@@ -12,8 +22,21 @@ const App = () => {
         const filteredTodo = todos.filter(todo => todo.id != todoId)
         setTodos(filteredTodo) 
     }
-    const addAktifitasHandler = (event) =>{
+    const saveHandler = (event) =>{
         event.preventDefault()
+        if(edit.id){
+            const editTodoIndex = todos.findIndex(todo => todo.id == edit.id)
+            const updateTodo = {
+                id:edit.id,
+                activity
+            }
+            const updateTodos = [...todos]
+            updateTodos[editTodoIndex] = updateTodo
+            setTodos(updateTodos)
+            setActivity('')
+            setEdit({})
+            return 
+        }
         setTodos([
             ...todos,
             {
@@ -26,7 +49,7 @@ const App = () => {
     return (
         <>
             <h1>Simple ToDo List</h1>
-            <form onSubmit={addAktifitasHandler}>
+            <form onSubmit={saveHandler}>
                 <input 
                     type="text"
                     placeholder="Nama Aktifitas"
@@ -35,14 +58,16 @@ const App = () => {
                         (event)=>setActivity(event.target.value)
                     }
                 />
-                <button type="submit">Tambah</button>
+                <button type="submit">{edit.id ? 'Perbaruin' :'Tambah'}</button>
+                {edit.id && (<button onClick={cancleHandler}>Batal</button>)}
             </form>
             <ul>
-                {todos.map((item, idx) => {
+                {todos.map((todo, idx) => {
                     return (
                         <li key={idx}>
-                            {item.activity+"\t"}
-                            <button onClick={removeHandler.bind(this,item.id)}>Hapus</button>
+                            {todo.activity+"\t"}
+                            <button onClick={editHandler.bind(this, todo)}>Edit</button>
+                            <button onClick={removeHandler.bind(this,todo.id)}>Hapus</button>
                         </li>
                     )
                 })}
