@@ -5,6 +5,13 @@ const App = () => {
     const [activity, setActivity] = React.useState('')
     const [todos, setTodos] = React.useState([])
     const [edit, setEdit] = React.useState({})
+    const [message, setMessage] = React.useState('')
+    React.useEffect(() => {
+      if(activity)setMessage('')
+    
+      return () => {}
+    }, [activity])
+    
     const editHandler = (todo) => {
         setActivity(todo.activity)
         setEdit(todo)
@@ -28,6 +35,7 @@ const App = () => {
     }
     const saveHandler = (event) =>{
         event.preventDefault()
+        if(!activity)return setMessage('Nama aktifitas jangan sampai kosong!!')
         if(edit.id){
             const editTodoIndex = todos.findIndex(todo => todo.id == edit.id)
             const updateTodo = {
@@ -53,6 +61,7 @@ const App = () => {
     return (
         <>
             <h1>Simple ToDo List</h1>
+            {message && <div style={{color: 'red'}}>{message}</div>}
             <form onSubmit={saveHandler}>
                 <input 
                     type="text"

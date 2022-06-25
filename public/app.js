@@ -5,6 +5,11 @@ const App = () => {
   const [activity, setActivity] = React.useState('');
   const [todos, setTodos] = React.useState([]);
   const [edit, setEdit] = React.useState({});
+  const [message, setMessage] = React.useState('');
+  React.useEffect(() => {
+    if (activity) setMessage('');
+    return () => {};
+  }, [activity]);
 
   const editHandler = todo => {
     setActivity(todo.activity);
@@ -33,6 +38,7 @@ const App = () => {
 
   const saveHandler = event => {
     event.preventDefault();
+    if (!activity) return setMessage('Nama aktifitas jangan sampai kosong!!');
 
     if (edit.id) {
       const editTodoIndex = todos.findIndex(todo => todo.id == edit.id);
@@ -55,7 +61,11 @@ const App = () => {
     setActivity('');
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Simple ToDo List"), /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Simple ToDo List"), message && /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: 'red'
+    }
+  }, message), /*#__PURE__*/React.createElement("form", {
     onSubmit: saveHandler
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
