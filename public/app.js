@@ -24,6 +24,8 @@ const App = () => {
   const removeHandler = todoId => {
     const filteredTodo = todos.filter(todo => todo.id != todoId);
     setTodos(filteredTodo);
+    setActivity('');
+    setEdit({});
   };
 
   const saveHandler = event => {
